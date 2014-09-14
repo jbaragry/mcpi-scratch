@@ -111,7 +111,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', action="store", dest="host", help="hostname/IP for the machine running Minecraft. Default is localhost")
     #parser.add_argument('-p', action="store", dest="port", type=int, help="port for the machine running Minecraft with the Pi protocol enabled. Default is 4711")
     args = parser.parse_args()
-    log.debug(args)
+    log.info(args)
 
     # nasty stuff to slow down the polling that comes from scratch.
     # from the docs, sratch is polling at 30 times per second
@@ -123,7 +123,10 @@ if __name__ == '__main__':
     prevPosStr = ""
 
     try:
-        mc = minecraft.Minecraft.create()
+        if args.host:
+            mc = minecraft.Minecraft.create(args.host)
+        else:
+            mc = minecraft.Minecraft.create()
     except:
         e = sys.exc_info()[0]
         log.exception('cannot connect to minecraft')
