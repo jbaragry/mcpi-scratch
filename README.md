@@ -1,9 +1,6 @@
 MCPI-Scratch
 ================
 
-In progress.....
-================
-
 A Scratch 2.0 extension application for the Minecraft Pi Protocol
 
 # Introduction
@@ -13,11 +10,13 @@ More specifically, its an extension application for the Scratch 2 standalone edi
 * Minecraft Pi Edition
 * CraftBukkit server with the RaspberryJuice mod
 
-A more detailed description of how it works is provided in [this blog entry]()
+A more detailed description of how it works is provided in [this blog entry](http://niphophila.blogspot.com/2014/09/mcpi-scratch-scratch-extension.html)
 
 You might also want to have a look at the documentation at ScriptCraft which has a nice [The Young Person's Guide to Programming in Minecraft](https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md). It has lots of general tips, for example on how to set up a flat world in CraftBukkit, before getting into its own javascript specific API. 
 
-You will also want to keep this [reference for block IDs and metadata]() handy.
+See also the excellent set of tutorials for [programming with the Pi Edition API](http://www.stuffaboutcode.com/2013/04/minecraft-pi-edition-api-tutorial.html). Its written for Python but the information can be easily applied to Scratch.
+
+You will also want to keep this [reference for block IDs and metadata](http://www.stuffaboutcode.com/p/minecraft-api-reference.html) handy.
 
 Everything is (c) Jason Baragry licensed under CC-BY-SA (Creative commons by attribution)
 
@@ -30,11 +29,23 @@ The last interesting feature is how the app deals with polling from Scratch. Scr
 # Installation
 Download and install the [Scratch 2 offline editor](http://scratch.mit.edu/scratch2download/).
 
-You need to run this extension application on the same machine as Scratch. Scratch will then communicate with it via HTTP on port X
+You need to run this extension application on the same machine as Scratch. Scratch will then communicate with it via HTTP on port `4715`
 
 Minecraft can either be runnnig on the same machine or on another machine which you can specify as a startup parameter. MCPI-Scratch expects Minecraft to be listening on the default port for the Minecraft Pi Protocol - `4711`
 
-MCPI-Scratch takes an optional command-line argument for the host of the minecraft server or minecraft pi 
+MCPI-Scratch takes an optional command-line argument for the host of the minecraft server or minecraft pi edition
+
+	$ python ./mcpi-scratch.py -h
+	usage: mcpi-scratch.py [-h] [-m HOST]
+
+	scratch2MinecraftPi is a Scratch2 extension helper app to allow Scratch
+	programs to manipulate Minecraft through the Pi protocol
+
+	optional arguments:
+	  -h, --help  show this help message and exit
+	  -m HOST     hostname/IP for the machine running Minecraft. Default is
+	              localhost
+
 
 # Getting Started
 Start the applications in the following order:
@@ -50,6 +61,7 @@ The application attempts to connect to localhost by default. Use the `-m host` c
 
 3. Start Scratch. 
 When the editor loads, shift-click the File menu and select `load experimental...` and select the file `filename` in the MCPI-Scratch install directory. You should now be able to select the `More Blocks` 
+
 
 
 # Changelog

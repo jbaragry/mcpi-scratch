@@ -2,7 +2,7 @@
 # adapted from : http://pymotw.com/2/BaseHTTPServer/
 # add python minecraft examples from http://www.stuffaboutcode.com/
 import sys, traceback
-import argparse
+import argparse, urllib
 from BaseHTTPServer import BaseHTTPRequestHandler
 import urlparse
 import mcpi.minecraft as minecraft
@@ -48,8 +48,8 @@ class GetHandler(BaseHTTPRequestHandler):
         return ''
 
     def postToChat(self, params):
-        log.info('post to chat: %s', params[0])
-        mc.postToChat(params[0])
+        log.info('post to chat: %s', urllib.unquote(params[0]))
+        mc.postToChat(urllib.unquote(params[0]))
         return ''
 
     def cross_domain(self, params):
@@ -107,7 +107,7 @@ class GetHandler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='scratch2MinecraftPi is a Scratch2 extension helper app to allow Scratch programs to manipulate Minecraft through the Pi protocol')
+    parser = argparse.ArgumentParser(description='mcpi-scratch is a Scratch2 extension helper app to allow Scratch programs to manipulate Minecraft through the Pi protocol')
     parser.add_argument('-m', action="store", dest="host", help="hostname/IP for the machine running Minecraft. Default is localhost")
     #parser.add_argument('-p', action="store", dest="port", type=int, help="port for the machine running Minecraft with the Pi protocol enabled. Default is 4711")
     args = parser.parse_args()
