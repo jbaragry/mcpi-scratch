@@ -57,7 +57,10 @@ This must be running before you start MCPI-Scratch because the application attem
 		* There's a nice blog about setting up this env at [StuffAboutCode](http://www.stuffaboutcode.com/2013/06/programming-minecraft-with-bukkit.html)
 
 2. Start MCPI-Scratch
-The application attempts to connect to localhost by default. Use the `-m host` cmd-line arg to specify minecraft running on another machine 
+The application attempts to connect to localhost by default. Use the `-m host` cmd-line arg to specify minecraft running on another machine
+	$ python ./mcpi-scratch.py
+	or
+	$ python ./mcpi-scratch.py -m 192.168.1.117 (the IP for your RPi or CraftBukkit server)
 
 3. Start Scratch. 
 When the editor loads, shift-click the File menu and select `load experimental...` and select the file `filename` in the MCPI-Scratch install directory. You should now be able to select the `More Blocks` 
@@ -77,7 +80,7 @@ V0.1:
 	* postToChat
 
 # Issues
-
+* the poll message doesn't work when there is no player in the world. Need to add a check to stop the exception
 
 
 
