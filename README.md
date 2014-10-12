@@ -50,26 +50,50 @@ MCPI-Scratch takes an optional command-line argument for the host of the minecra
 # Getting Started
 Start the applications in the following order:
 
-1. Start Minecraft. 
+1. Make sure you have Python installed
+
+2. Start Minecraft. 
 This must be running before you start MCPI-Scratch because the application attempts to create a connection on startup and will fail if Minecraft is not running. You can use either:
 	* Minecraft Pi Edition or 
 	* CraftBukkit server with the RaspberryJuice mod + plus the Minecraft launcher to start a client to connect to the server
 		* There's a nice blog about setting up this env at [StuffAboutCode](http://www.stuffaboutcode.com/2013/06/programming-minecraft-with-bukkit.html)
 
-2. Start MCPI-Scratch
+3. Start MCPI-Scratch
 The application attempts to connect to localhost by default. Use the `-m host` cmd-line arg to specify minecraft running on another machine
 	$ python ./mcpi-scratch.py
 	or
 	$ python ./mcpi-scratch.py -m 192.168.1.117 (the IP for your RPi or CraftBukkit server)
 
-3. Start Scratch. 
+4. Start Scratch. 
 When the editor loads, shift-click the File menu and select `load experimental...` and select the file `filename` in the MCPI-Scratch install directory. You should now be able to select the `More Blocks` 
 
-
+# Scratch Blocks
+MCPI-Scratch supports the following Blocks
+* getPlayerPos:
+	* get the Player's x,y,z coordinates (in minecraft, the y coordinate is the vertical plane [height])
+* setPlayerPos:
+	* set the Player's x,y,z coordinates (in minecraft, the y coordinate is the vertical plane [height])
+* postToChat:
+	* post a string to the chat window
+* postPlayerPosToChat:
+	* post a Player's x,y,z coords to the chat window. Useful to have on the scratch canvas so that you can easily find where you are
+* setBlock:
+	* set a block at the x,y,z coordinates. The blockType (e.g., WOOL) and metadata (e.g., colour) can also be set. The coords can be absolute or relative the player position 
+* setBlocks:
+	* set a collection of blocks between 2 x,y,z coordinates. BlockType and metadata can also be set.
+* setLine:
+	* set a line of blocks between to x,z coordinates at a particular height (y). BlockType and metadata can also be set
+* setCircle:
+	* set a circle with center at x,z coordinates and at a particular height (y). BlockType and metadata can also be set
 
 # Changelog
 
-V0.1:
+20141011
+* added blocks for setLine and setCircle drawing based on Bresenham's Algorithms
+* added block for postPlayerPosToChat to allow viewing of the current player position
+* [blog entry](http://niphophila.blogspot.no/2014/10/mcpi-scratch-lines-and-circles.html)
+
+20140915:
 * first release to test the idea
 * includes API operations
 	* getPlayerPos
@@ -78,6 +102,7 @@ V0.1:
 		* setBlock has a switch to interpret the coordinates as being either absolute or relative to the player position
 	* setBlocks
 	* postToChat
+* [blog entry](http://niphophila.blogspot.com/2014/09/mcpi-scratch-scratch-extension.html)
 
 # Issues
 * the poll message doesn't work when there is no player in the world. Need to add a check to stop the exception

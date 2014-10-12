@@ -5,8 +5,11 @@
     ["r", "get Player pos %m.pos", "playerPos"],
     [" ", "set Player pos to x:%n y:%n z:%n", "setPlayerPos", 0, 0, 0],
     [" ", "post to chat %s", "postToChat", "chat_msg"],
+    [" ", "post Player pos chat", "playerPosToChat"],
     [" ", "set block pos x:%n y:%n z:%n to type %n data %n %m.blockPos", "setBlock", 0, 0, 0, 1, -1],
     [" ", "set blocks pos x1:%n y1:%n z1:%n to x2:%n y2:%n z2:%n to type %n data %n", "setBlocks", 0, 0, 0, 0, 0, 0, 1, -1],
+    [" ", "set line pos x1:%n z1:%n to x2:%n z2:%n height y:%n to type %n data %n", "setLine", 0, 0, 0, 0, 0, 1, -1],
+    [" ", "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n", "setCircle", 0, 0, 0, 0, 0, 1, -1],
   ],
   "menus": {
     "pos": ["x", "y", "z"],

@@ -9,27 +9,29 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 import logging
 
-#logging.basicConfig(level=logging.DEBUG)
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 class GetHandler(BaseHTTPRequestHandler):
 
-    def setBlock(self, params): # doesn't support metadata
+    def setBlock(self, params):
         print ('setblock: {0}'.format(params))
         x = int(params[0])
         y = int(params[1])
         z = int(params[2])
+        blockType = int(params[3])
+        blockData = int(params[4])
         if (params[5] == 'rel'): # set the block relative to the player
             playerPos = mc.player.getPos()
             playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
             x += playerPos.x
             y += playerPos.y
             z += playerPos.z
-        if (int(params[4]) == -1): # sure these is a more pythonesque way of doing this
-            mc.setBlock(x, y, z, int(params[3]))
+        if (blockData == -1): # sure these is a more pythonesque way of doing this
+            mc.setBlock(x, y, z, blockType)
         else:
-            mc.setBlock(x, y, z, int(params[3]), int(params[4]))
+            mc.setBlock(x, y, z, blockType, blockData)
         return ''
 
     def setBlocks(self, params): # doesn't support metadata
@@ -47,9 +49,130 @@ class GetHandler(BaseHTTPRequestHandler):
         mc.player.setPos(int(params[0]), int(params[1]), int(params[2]))
         return ''
 
+    # implementation of Bresenham's Line Algorithm to rasterise the points in a line between two endpoints
+    # algorithm taken from: http://www.roguebasin.com/index.php?title=Bresenham%27s_Line_Algorithm#Python
+    # note: y refers to usual cartesian x,y coords. Not the minecraft coords where y is the veritical axis
+    def getLinePoints(self, x1, y1, x2, y2):
+        points = []
+        issteep = abs(y2-y1) > abs(x2-x1)
+        if issteep:
+            x1, y1 = y1, x1
+            x2, y2 = y2, x2
+        rev = False
+        if x1 > x2:
+            x1, x2 = x2, x1
+            y1, y2 = y2, y1
+            rev = True
+        deltax = x2 - x1
+        deltay = abs(y2-y1)
+        error = int(deltax / 2)
+        y = y1
+        ystep = None
+        if y1 < y2:
+            ystep = 1
+        else:
+            ystep = -1
+        for x in range(x1, x2 + 1):
+            if issteep:
+                points.append((y, x))
+            else:
+                points.append((x, y))
+            error -= deltay
+            if error < 0:
+                y += ystep
+                error += deltax
+        # Reverse the list if the coordinates were reversed
+        if rev:
+            points.reverse()
+        return points
+
+    # calls getLine to rasterise a line between two points, the last param is the vertical axis.
+    # eg: x1,z1,x2,z2,y in minecraft coordinates
+    # then plots the line using setBlock
+    def setLine(self, params): 
+        log.info('invoke setLine with params: {} {} {} {} {}'.format(params[0], params[1], params[2], params[3], params[4], params[5]))
+        log.debug(params)
+        x1 = int(params[0])
+        z1 = int(params[1])
+        x2 = int(params[2])
+        z2 = int(params[3])
+        y = int(params[4])
+        blockType = int(params[5])
+        blockData = int(params[6])
+        points = self.getLinePoints(x1, z1, x2, z2)
+        log.debug(points)
+        for p in points:
+            self.setBlock([p[0], y, p[1], blockType, blockData, ''])
+        return ''
+
+    # plots a circles point coords using Bresenham's circle algorithm (also known as a midpoint circle algorithm)
+    # based on code from http://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#Python
+    # note: y refers to usual cartesian x,y coords. Not the minecraft coords where y is the veritical axis
+    def getCirclePoints(self, x0, y0, radius):
+        log.debug('getCirclePoints with: {} {} {}'.format(x0, y0, radius))
+        points = []
+        x = 0
+        y = radius
+        f = 1 - radius
+        ddf_x = 1
+        ddf_y = -2 * radius
+        x = 0
+        y = radius
+        points.append((x0, y0 + radius))
+        points.append((x0, y0 - radius))
+        points.append((x0 + radius, y0))
+        points.append((x0 - radius, y0))
+
+        while x < y:
+            if f >= 0: 
+                y -= 1
+                ddf_y += 2
+                f += ddf_y
+            x += 1
+            ddf_x += 2
+            f += ddf_x    
+            points.append((x0 + x, y0 + y))
+            points.append((x0 - x, y0 + y))
+            points.append((x0 + x, y0 - y))
+            points.append((x0 - x, y0 - y))
+            points.append((x0 + y, y0 + x))
+            points.append((x0 - y, y0 + x))
+            points.append((x0 + y, y0 - x))
+            points.append((x0 - y, y0 - x))
+
+        return points
+
+    # builds a circle using Bresenham's circle algorithm (also known as a midpoint circle algorithm)
+    # plots using setBlock
+    def setCircle(self, params): 
+        log.info('invoke setCircle with params: {} {} {} {} {}'.format(params[0], params[1], params[2], params[3], params[4]))
+        log.debug(params)
+        x1 = int(params[0])
+        z1 = int(params[1])
+        r = int(params[2])
+        y = int(params[3])
+        blockType = int(params[4])
+        blockData = int(params[5])
+        points = self.getCirclePoints(x1, z1, r)
+        log.debug(points)
+        for p in points:
+            self.setBlock([p[0], y, p[1], blockType, blockData, ''])
+        return ''
+
     def postToChat(self, params):
         log.info('post to chat: %s', urllib.unquote(params[0]))
         mc.postToChat(urllib.unquote(params[0]))
+        return ''
+
+    def playerPosToChat(self, params):
+        log.info('playerPos to chat')
+        playerPos = mc.player.getPos()
+        log.debug(playerPos)
+        playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
+        log.debug(playerPos)
+        posStr = ("x {0} y {1} z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
+        log.debug(posStr)
+        mc.postToChat(urllib.unquote(posStr))
         return ''
 
     def cross_domain(self, params):
@@ -88,6 +211,9 @@ class GetHandler(BaseHTTPRequestHandler):
             "setBlock" : self.setBlock,
             "setBlocks" : self.setBlocks,
             "setPlayerPos" : self.setPlayerPos,
+            "playerPosToChat" : self.playerPosToChat,
+            "setLine" : self.setLine,
+            "setCircle" : self.setCircle,
             "cross_domain.xml" : self.cross_domain,
             "reset_all" : self.reset_all,
         }
