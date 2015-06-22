@@ -3,6 +3,9 @@ MCPI-Scratch
 
 A Scratch 2.0 extension application for the Minecraft Pi Protocol
 
+# Status
+Currently working on a fix to MCPI-Scratch working with [ScratchX](http://http://scratchx.org/)
+
 # Introduction
 MCPI-Scratch lets you write Scratch scripts to manipulate Minecraft. 
 
