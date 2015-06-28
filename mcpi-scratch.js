@@ -8,11 +8,19 @@
         return {status: 2, msg: 'Ready'};
     };
 
+    var mcpiHlprURL = "localhost:4715"
+
+    ext.chat_msg = function() {
+        $.ajax({
+              url: mcpiHlprURL+'/postToChar/Bob'
+        });
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             // Block type, block name, function name
-            [' ', 'my first block', 'my_first_block'],
+            [' ', 'post to chat', 'postToChat', 'chat_msg'],
         ]
     };
 
