@@ -8,11 +8,18 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    var mcpiHlprURL = "localhost:4715"
+    var mcpiHlprURL = "http://localhost:4715"
 
     ext.chat_msg = function() {
         $.ajax({
-              url: mcpiHlprURL+'/postToChar/Bob'
+            type: "GET",
+            url: "http://localhost:4715/postToChat/Bob"
+            success: function(data) {
+                console.log("postToChat success");
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("Error postToChat");
+            }
         });
     };
 
