@@ -27,7 +27,7 @@
     var descriptor = {
         blocks: [
             // Block type, block name, function name
-            [' ', 'post to chat', 'postToChat', 'chat_msg'],
+            [' ', 'post to chat', 'postToChat', 'chat_msg']
         ]
     };
 
