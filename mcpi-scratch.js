@@ -9,7 +9,7 @@
     ext.postToChat = function() {
         $.ajax({
             type: "GET",
-            url: "http://localhost:4715/postToChat/Bob"
+            url: "http://localhost:4715/postToChat/Bob",
             success: function(data) {
                 console.log("postToChat success");
             },
