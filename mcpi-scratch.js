@@ -10,6 +10,7 @@
         $.ajax({
             type: "GET",
             url: "http://localhost:4715/postToChat/Bob",
+            dataType: "jsonp",
             success: function(data) {
                 console.log("postToChat success");
             },
