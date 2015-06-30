@@ -52,7 +52,7 @@
     };
 
     ext.setBlock = function(x, y, z, blockType, blockData, posType) {
-        var cmdUrl = "http://localhost:4715/setPlayerPos/" + x + "/" + y + "/" + z + "/" + blockType + "/" + blockData + "/" + posType;
+        var cmdUrl = "http://localhost:4715/setBlock/" + x + "/" + y + "/" + z + "/" + blockType + "/" + blockData + "/" + posType;
         $.ajax({
             type: "GET",
             url: cmdUrl,
