@@ -36,11 +36,27 @@
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
 
+    ext.setPlayerPos = function(x, y, z) {
+        var cmdUrl = "http://localhost:4715/setPlayerPos/" + x + "/" + y + "/" + z;
+        $.ajax({
+            type: "GET",
+            url: cmdUrl,
+            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            success: function(data) {
+                console.log("setPlayerPos success");
+            },
+            error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
+                console.log("Error setPlayerPos: ", error);
+            }
+        }); // nb: GET is including the javascript callback. Do I need this for one-way call?
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['', 'post to chat %s', 'postToChat', 'message'],
             [" ", "post Player.pos chat", "playerPosToChat"],
+            [" ", "set Player pos to x:%n y:%n z:%n", "setPlayerPos", 0, 0, 0],
         ]
     };
 
