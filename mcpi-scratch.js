@@ -127,6 +127,7 @@
             [" ", "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n", "setCircle", 0, 0, 0, 0, 0, 1, -1],
         ],
         menus: {
+            pos: ['x', 'y', 'z'],
             blockPos: ['abs', 'rel']
         }
     };

@@ -202,6 +202,16 @@ class GetHandler(BaseHTTPRequestHandler):
         posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
         prevPosStr = posStr
         return posStr
+
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
+        self.send_header('Access-Control-Allow-Credentials', 'true')
+        # deal with the CORS issue
+        # start with all and then limit to the scratchx domain
+        #self.send_header('Access-Control-Allow-Origin', 'http://localhost:8888')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With, Content-type")
     
     def do_GET(self):
         global mc
