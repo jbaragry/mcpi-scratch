@@ -208,9 +208,8 @@ class GetHandler(BaseHTTPRequestHandler):
         self.send_response(200, "ok")
         self.send_header('Access-Control-Allow-Credentials', 'true')
         # deal with the CORS issue
-        # start with all and then limit to the scratchx domain
-        #self.send_header('Access-Control-Allow-Origin', 'http://localhost:8888')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', 'http://scratchx.org')
+        #self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With, Content-type")
     
@@ -238,6 +237,8 @@ class GetHandler(BaseHTTPRequestHandler):
         message_parts.append(pollResp)
         message = '\r\n'.join(message_parts)
         self.send_response(200)
+        # deal with the CORS issue
+        self.send_header('Access-Control-Allow-Origin', 'http://scratchx.org')
         self.end_headers()
         self.wfile.write(message)
         return
