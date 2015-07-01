@@ -184,6 +184,7 @@ class GetHandler(BaseHTTPRequestHandler):
         log.info('trying to reset')
         return ''
 
+    # currently unused
     def pollEvents(self, params):
         global pollInc, pollLimit, prevPosStr
         pollInc += 1
