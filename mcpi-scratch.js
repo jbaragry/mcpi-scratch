@@ -26,7 +26,7 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            // dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("playerPosToChat success");
             },
