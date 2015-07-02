@@ -11,7 +11,7 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("postToChat success");
             },
@@ -41,7 +41,7 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("setPlayerPos success");
             },
@@ -56,7 +56,7 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("setBlock success");
             },
@@ -72,12 +72,12 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
-                console.log("setBlock success");
+                console.log("setBlocks success");
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
-                console.log("Error setBlock: ", error);
+                console.log("Error setBlocks: ", error);
             }
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
@@ -88,12 +88,12 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
-                console.log("setBlock success");
+                console.log("setLine success");
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
-                console.log("Error setBlock: ", error);
+                console.log("Error setLine: ", error);
             }
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
@@ -104,12 +104,12 @@
         $.ajax({
             type: "GET",
             url: cmdUrl,
-            dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
-                console.log("setBlock success");
+                console.log("setCircle success");
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
-                console.log("Error setBlock: ", error);
+                console.log("Error setCircle: ", error);
             }
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
