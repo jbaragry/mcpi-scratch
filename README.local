@@ -1,0 +1,14 @@
+start minecraft server
+> cd /Users/jason/Minecraft/CraftBukkit/CraftBukkit_1.7.9.R0.2
+> ./start_server.command
+
+start minecraft client
+> multiplayer
+> direct connect to localhost
+
+start mcpi-scratch
+> instucts on the github page
+
+start scratchx
+> http://scratchx.org/?url=https://rawgit.com/jbaragry/mcpi-scratch/master/mcpi-scratch.js#scratch
+
