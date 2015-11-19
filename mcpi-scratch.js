@@ -114,8 +114,8 @@
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
 
-    ext.getPlayerPos = function(player) {
-        var cmdUrl = "http://localhost:4715/getPlayerPos/"
+    ext.getPlayerPos = function(coord) {
+        var cmdUrl = "http://localhost:4715/getPlayerPos/" + coord;
         $.ajax({
             type: "GET",
             url: cmdUrl,
