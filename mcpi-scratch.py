@@ -185,7 +185,7 @@ class GetHandler(BaseHTTPRequestHandler):
         return ''
 
     def getPlayerPos(self, params): # doesn't support metadata
-        log.info('invoke getPlayerPos')
+        log.info('invoke getPlayerPos: {}'.format(params[0]))
         playerPos = mc.player.getPos()
         #Using your players position
         # - the players position is an x,y,z coordinate of floats (e.g. 23.59,12.00,-45.32)
@@ -195,6 +195,7 @@ class GetHandler(BaseHTTPRequestHandler):
         playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
         posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
         prevPosStr = posStr
+        log.debug('posStr: %s', posStr)
         return posStr
 
     # currently unused
@@ -239,6 +240,7 @@ class GetHandler(BaseHTTPRequestHandler):
             "setCircle" : self.setCircle,
             "cross_domain.xml" : self.cross_domain,
             "reset_all" : self.reset_all,
+            "getPlayerPos" : self.getPlayerPos,
         }
         parsed_path = urlparse.urlparse(self.path)
         message_parts = []
