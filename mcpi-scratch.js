@@ -122,7 +122,7 @@
             url: cmdUrl,
             //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
-                console.log("getPlayerPos success ", data);
+                console.log("getPlayerPos success ", data.trim());
                 callback(data.trim());
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
