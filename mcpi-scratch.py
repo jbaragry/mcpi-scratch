@@ -186,14 +186,15 @@ class GetHandler(BaseHTTPRequestHandler):
 
     def getPlayerPos(self, params): # doesn't support metadata
         log.info('invoke getPlayerPos: {}'.format(params[0]))
-        playerPos = mc.player.getPos()
+        # playerPos = mc.player.getPos()
         #Using your players position
         # - the players position is an x,y,z coordinate of floats (e.g. 23.59,12.00,-45.32)
         # - in order to use the players position in other commands we need integers (e.g. 23,12,-45)
         # - so round the players position
         # - the Vec3 object is part of the minecraft class library
-        playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
-        posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
+        # playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
+        # posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
+        posStr = '2'
         prevPosStr = posStr
         log.debug('posStr: %s', posStr)
         return posStr
