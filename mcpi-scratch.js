@@ -125,11 +125,11 @@
             //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("getPlayerPos success ", data);
-                return data;
+                return data.toString();
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
                 console.log("Error setPlayerPos: ", error);
-                return 0;
+                return "null";
             }
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
