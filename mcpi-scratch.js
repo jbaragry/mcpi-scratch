@@ -117,7 +117,7 @@
     // get one coord (x, y, or z) for playerPos
     // uses blocking io. Scratch will wait for the answer
     // TODO: change to nonblocking callback
-    ext.getPlayerPos = function(posCoord) {
+    ext.getPlayerPos = function(posCoord, callback) {
         var cmdUrl = "http://localhost:4715/getPlayerPos/" + posCoord;
         $.ajax({
             type: "GET",
@@ -125,12 +125,11 @@
             //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("getPlayerPos success ", data);
-                //return data;
-                return 4;
+                callback(data);
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
-                console.log("Error setPlayerPos: ", error);
-                return 0;
+                console.log("Error getPlayerPos: ", error);
+                callback(null);
             }
         }); // nb: GET is including the javascript callback. Do I need this for one-way call?
     };
