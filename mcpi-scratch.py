@@ -194,9 +194,9 @@ class GetHandler(BaseHTTPRequestHandler):
         # - the Vec3 object is part of the minecraft class library
         playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
         # posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
-        prevPosStr = posStr
-        log.debug('posStr: %s', posStr)
-        return posStr
+        # prevPosStr = posStr
+        log.debug(playerPos)
+        return str(playerPos.x)
 
     # currently unused
     def pollEvents(self, params):
