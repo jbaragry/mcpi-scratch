@@ -196,7 +196,16 @@ class GetHandler(BaseHTTPRequestHandler):
         # posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
         # prevPosStr = posStr
         log.debug(playerPos)
-        return str(playerPos.x)
+        # I'm sure theres a more pythony way to get at the vector elements but...
+        coord = params[0];
+        coordVal = 0;
+        if (coord == 'x'):
+            coordVal = playerPos.x
+        if (coord == 'y'):
+            coordVal = playerPos.y
+        if (coord == 'z'):
+            coordVal = playerPos.z
+        return str(coordVal)
 
     # currently unused
     def pollEvents(self, params):
