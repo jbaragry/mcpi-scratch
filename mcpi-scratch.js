@@ -126,7 +126,7 @@
             success: function(data) {
                 console.log("getPlayerPos success ", data);
                 //return data;
-                return 2;
+                return 4.toString();
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
                 console.log("Error setPlayerPos: ", error);
