@@ -24,6 +24,7 @@ Everything is (c) Jason Baragry licensed under CC-BY-SA (Creative commons by att
 * added example projects to the repo
 	* chat.sbx: example wiht post to chat block
 	* playerPos.sbx: post pos to chat and then reports x, y, z to variables in the scratch project
+	* rainbox.sbx: create rainbow 
 
 20150629
 * changed from the Scratch 2 standalone editor to the ScratchX online editor
