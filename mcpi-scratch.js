@@ -154,7 +154,7 @@
             //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
                 console.log("checkMC_Events success ", data.trim());
-                if (int(data) == 1):
+                if (parseInt(data) == 1):
                     blockHits = true;
                 else:
                     blockHits = false;
