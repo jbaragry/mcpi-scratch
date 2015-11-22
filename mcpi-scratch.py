@@ -9,7 +9,9 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 import logging
 
-
+logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 class GetHandler(BaseHTTPRequestHandler):
 
@@ -217,6 +219,7 @@ class GetHandler(BaseHTTPRequestHandler):
             y += playerPos.y
             z += playerPos.z
         blockData = mc.getBlockWithData(x, y, z)
+        log.info ('blockData: %s', blockData)
         return str(block.id)
 
     # from original version for scratch2

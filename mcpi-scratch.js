@@ -162,7 +162,7 @@
             [" ", "set line pos x1:%n z1:%n to x2:%n z2:%n height y:%n to type %n data %n", "setLine", 0, 0, 0, 0, 0, 1, -1],
             [" ", "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n", "setCircle", 0, 0, 0, 0, 0, 1, -1],
             ["R", "get player pos %m.pos", "getPlayerPos", 'x'],
-            ["R", "get block pos x:%n y:%n z:%n %m.blockPos", "getPlayerPos", 0, 0, 0],
+            ["R", "get block pos x:%n y:%n z:%n %m.blockPos", "getBlock", 0, 0, 0],
         ],
         menus: {
             pos: ['x', 'y', 'z'],
