@@ -21,6 +21,10 @@ Everything is (c) Jason Baragry licensed under CC-BY-SA (Creative commons by att
 * added block to report player position.
 	* must request x, y, z separately
 	* position is fetched per request, it is not polling
+* added block to get blockType at position
+	* set x, y, z
+	* set absolute or relative to player position
+	* returns the type but does not return block data (e.g, colour)
 * added example projects to the repo
 	* chat.sbx: example wiht post to chat block
 	* playerPos.sbx: post pos to chat and then reports x, y, z to variables in the scratch project
