@@ -1,10 +1,6 @@
 (function (ext) {
-    // Cleanup function when the extension is unloaded
-    ext._shutdown = function() {};
 
-    ext._getStatus = function() {
-        return { status:2, msg:'Ready' };
-    };
+    var blockHits = false;
 
     ext.postToChat = function(str) {
         var cmdUrl = "http://localhost:4715/postToChat/" + encodeURIComponent(str);
@@ -150,6 +146,44 @@
         }); 
     };
 
+    function checkMC_Events() {
+        var cmdUrl = "http://localhost:4715/pollBlockHit/";
+        $.ajax({
+            type: "GET",
+            url: cmdUrl,
+            //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
+            success: function(data) {
+                console.log("checkMC_Events success ", data.trim());
+                if int(data) == 1:
+                    blockHits = true;
+                else:
+                    blockHits = false;
+            },
+            error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
+                console.log("Error checkMC_Events: ", error);
+                callback(null);
+            }
+        }); 
+    };
+
+    ext.whenBlockHit = function(str) {
+        if (!blockHits):
+            return;
+        else:
+            return true;
+    };
+
+
+    ext._getStatus = function() {
+        return { status:2, msg:'Ready' };
+    };
+
+    ext._shutdown = function() {
+        if (poller) {
+          clearInterval(poller);
+          poller = null;
+        }
+    };
 
     // Block and block menu descriptions
     var descriptor = {
@@ -163,6 +197,7 @@
             [" ", "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n", "setCircle", 0, 0, 0, 0, 0, 1, -1],
             ["R", "get player pos %m.pos", "getPlayerPos", 'x'],
             ["R", "get block pos x:%n y:%n z:%n %m.blockPos", "getBlock", 0, 0, 0],
+            ["h", "when blockHit", 'whenBlockHit'],
         ],
         menus: {
             pos: ['x', 'y', 'z'],
@@ -172,5 +207,8 @@
 
     // Register the extension
     ScratchExtensions.register('MCPI-Scratch', descriptor, ext);
+
+    checkMC_Events()
+    var poller = setInterval(checkMC_Events, 2000);
 
 })({});
