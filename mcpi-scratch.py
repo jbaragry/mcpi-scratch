@@ -222,6 +222,18 @@ class GetHandler(BaseHTTPRequestHandler):
         log.info ('blockData: %s', blockData)
         return str(blockData.id)
 
+    # pollBlockHits calls pollBlockHits function
+    # currently only returns the first block in the period between polls
+    # requires that polling is enabled to check  
+    # TODO: refactor to return multiple blocks
+    def pollBlockHits(self, params):
+        log.info ('pollBlockHits: {0}'.format(params))
+        blockData = mc.events.pollBlockHits()
+        log.info ('blockHits: %s', blockHits)
+        if blockHits:
+            return 1
+        return 0
+
     # from original version for scratch2
     # currently unused
     def pollEvents(self, params):
@@ -268,6 +280,7 @@ class GetHandler(BaseHTTPRequestHandler):
             "reset_all" : self.reset_all,
             "getPlayerPos" : self.getPlayerPos,
             "getBlock" : self.getBlock,
+            "pollBlockHit" : self.pollBlockHit,
         }
         parsed_path = urlparse.urlparse(self.path)
         message_parts = []
