@@ -167,9 +167,9 @@
     };
 
     ext.whenBlockHit = function(str) {
-        if (!blockHits):
+        if (!blockHits)
             return;
-        else:
+        else
             return true;
     };
 
