@@ -220,7 +220,7 @@ class GetHandler(BaseHTTPRequestHandler):
             z += playerPos.z
         blockData = mc.getBlockWithData(x, y, z)
         log.info ('blockData: %s', blockData)
-        return str(block.id)
+        return str(blockData.id)
 
     # from original version for scratch2
     # currently unused
