@@ -9,9 +9,7 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
-#logging.basicConfig(level=logging.INFO)
-log = logging.getLogger(__name__)
+
 
 class GetHandler(BaseHTTPRequestHandler):
 
@@ -23,8 +21,8 @@ class GetHandler(BaseHTTPRequestHandler):
         blockType = int(params[3])
         blockData = int(params[4])
         if (params[5] == 'rel'): # set the block relative to the player
-            playerPos = mc.player.getPos()
-            playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
+            playerPos = mc.player.getTilePos()
+            #playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
             x += playerPos.x
             y += playerPos.y
             z += playerPos.z
@@ -166,9 +164,9 @@ class GetHandler(BaseHTTPRequestHandler):
 
     def playerPosToChat(self, params):
         log.info('playerPos to chat')
-        playerPos = mc.player.getPos()
+        playerPos = mc.player.getTilePos()
         log.debug(playerPos)
-        playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
+        #playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
         log.debug(playerPos)
         posStr = ("x {0} y {1} z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
         log.debug(posStr)
@@ -193,8 +191,6 @@ class GetHandler(BaseHTTPRequestHandler):
         # - so round the players position
         # - the Vec3 object is part of the minecraft class library
         playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
-        # posStr = ("playerPos/x {0}\r\nplayerPos/y {1}\r\nplayerPos/z {2}".format(str(playerPos.x), str(playerPos.y), str(playerPos.z)))
-        # prevPosStr = posStr
         log.debug(playerPos)
         # I'm sure theres a more pythony way to get at the vector elements but...
         coord = params[0];
@@ -207,6 +203,23 @@ class GetHandler(BaseHTTPRequestHandler):
             coordVal = playerPos.z
         return str(coordVal)
 
+    # getBlock calls getBlockWithData function
+    # currently only returns the id and not the data 
+    # TODO: refactor to return data also
+    def getBlock(self, params):
+        log.info ('getBlock: {0}'.format(params))
+        x = int(params[0])
+        y = int(params[1])
+        z = int(params[2])
+        if (params[3] == 'rel'): # set the block relative to the player
+            playerPos = mc.player.getTilePos()
+            x += playerPos.x
+            y += playerPos.y
+            z += playerPos.z
+        blockData = mc.getBlockWithData(x, y, z)
+        return str(block.id)
+
+    # from original version for scratch2
     # currently unused
     def pollEvents(self, params):
         global pollInc, pollLimit, prevPosStr
@@ -251,6 +264,7 @@ class GetHandler(BaseHTTPRequestHandler):
             "cross_domain.xml" : self.cross_domain,
             "reset_all" : self.reset_all,
             "getPlayerPos" : self.getPlayerPos,
+            "getBlock" : self.getBlock,
         }
         parsed_path = urlparse.urlparse(self.path)
         message_parts = []
