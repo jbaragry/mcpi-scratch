@@ -280,7 +280,7 @@ class GetHandler(BaseHTTPRequestHandler):
             "reset_all" : self.reset_all,
             "getPlayerPos" : self.getPlayerPos,
             "getBlock" : self.getBlock,
-            "pollBlockHit" : self.pollBlockHit,
+            "pollBlockHit" : self.pollBlockHits,
         }
         parsed_path = urlparse.urlparse(self.path)
         message_parts = []
