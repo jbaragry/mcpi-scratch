@@ -231,8 +231,8 @@ class GetHandler(BaseHTTPRequestHandler):
         blockHits = mc.events.pollBlockHits()
         log.info ('blockHits: %s', blockHits)
         if blockHits:
-            return 1
-        return 0
+            return str(1)
+        return str(0)
 
     # from original version for scratch2
     # currently unused
