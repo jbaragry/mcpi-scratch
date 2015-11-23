@@ -228,7 +228,7 @@ class GetHandler(BaseHTTPRequestHandler):
     # TODO: refactor to return multiple blocks
     def pollBlockHits(self, params):
         log.info ('pollBlockHits: {0}'.format(params))
-        blockData = mc.events.pollBlockHits()
+        blockHits = mc.events.pollBlockHits()
         log.info ('blockHits: %s', blockHits)
         if blockHits:
             return 1
