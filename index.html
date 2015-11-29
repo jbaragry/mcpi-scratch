@@ -42,12 +42,12 @@
 
 <ul>
 <li>Minecraft Pi Edition</li>
-<li>CraftBukkit server with the RaspberryJuice mod</li>
+<li>CanaryMod server with the RaspberryJuice mod</li>
 </ul>
 
 <p>A more detailed description of how it works is provided in <a href="http://niphophila.blogspot.no/2015/07/mcpi-scratch-updated-to-manipulate.html">this blog entry</a></p>
 
-<p>You might also want to have a look at the documentation at ScriptCraft which has a nice <a href="https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md">The Young Person's Guide to Programming in Minecraft</a>. It has lots of general tips, for example on how to set up a flat world in CraftBukkit, before getting into its own javascript specific API. </p>
+<p>You might also want to have a look at the documentation at ScriptCraft which has a nice <a href="https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md">The Young Person's Guide to Programming in Minecraft</a>. It has lots of general tips, for example on how to set up a flat world in CanaryMod, before getting into its own javascript specific API. </p>
 
 <p>See also the excellent set of tutorials for <a href="http://www.stuffaboutcode.com/2013/04/minecraft-pi-edition-api-tutorial.html">programming with the Pi Edition API</a>. Its written for Python but the information can be easily applied to Scratch.</p>
 
@@ -93,10 +93,10 @@ This must be running before you start MCPI-Scratch because the application attem
 
 <ul>
 <li>Minecraft Pi Edition or </li>
-<li>CraftBukkit server with the RaspberryJuice mod + plus the Minecraft launcher to start a client to connect to the server
+<li>CanaryMod server with the RaspberryJuice mod + plus the Minecraft launcher to start a client to connect to the server
 
 <ul>
-<li>There's a nice blog about setting up this env at <a href="http://www.stuffaboutcode.com/2013/06/programming-minecraft-with-bukkit.html">StuffAboutCode</a>
+<li>There's a nice blog about setting up this env at <a href="http://www.stuffaboutcode.com/2014/10/minecraft-raspberryjuice-and-canarymod.html">StuffAboutCode</a>
 </li>
 </ul>
 </li>
@@ -106,7 +106,7 @@ This must be running before you start MCPI-Scratch because the application attem
 The application attempts to connect to localhost by default. Use the <code>-m host</code> cmd-line arg to specify minecraft running on another machine
 $ python ./mcpi-scratch.py
 or
-$ python ./mcpi-scratch.py -m 192.168.1.117 (the IP for your RPi or CraftBukkit server)</p></li>
+$ python ./mcpi-scratch.py -m 192.168.1.117 (the IP for your RPi or CanaryMod server)</p></li>
 <li><p>Open <a href="http://scratchx.org">ScratchX</a> with a browser. 
 You can copy this url <code>http://jbaragry.github.io/mcpi-scratch/mcpi-scratch.js</code> to use in ScratchX<br/>
 Alternatively you can open <code>MCPI-Scrarch</code> <a href="http://scratchx.org/?url=http://jbaragry.github.io/mcpi-scratch/mcpi-scratch.js">directly in ScratchX</a><br/>
