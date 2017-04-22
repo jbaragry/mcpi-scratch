@@ -1,2 +1,4 @@
 .DS_Store
 updatePagesWithExt.sh
+*.pyc
+**/*.pyc
