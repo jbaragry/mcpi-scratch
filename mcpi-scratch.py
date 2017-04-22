@@ -319,17 +319,15 @@ if __name__ == '__main__':
     prevPosStr = ""
 
 
-    host = args.host or "localhost";
-    while (True):
+    host = args.host or "localhost"
+    connected = False
+    while (not connected):
         try:
             mc = minecraft.Minecraft.create(host)
+            connected = True
         except:
-            print("Timed out connecting to a Minecraft MCPI server (" + host + ":4711). Retrying in "+ str(MCPI_CONNECT_TIMEOUT) +" secs ... Press CTRL-C to exit.");
-            time.sleep( MCPI_CONNECT_TIMEOUT );
-            #e = sys.exc_info()[0]
-            #log.exception('cannot connect to minecraft')
-            #traceback.print_exc(file=sys.stdout)
-            #sys.exit(0)
+            print("Timed out connecting to a Minecraft MCPI server (" + host + ":4711). Retrying in "+ str(MCPI_CONNECT_TIMEOUT) +" secs ... Press CTRL-C to exit.")
+            time.sleep( MCPI_CONNECT_TIMEOUT )
 
     from BaseHTTPServer import HTTPServer
     server = HTTPServer(('localhost', 4715), GetHandler)
