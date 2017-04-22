@@ -8,6 +8,9 @@ import urlparse
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 import logging
+import time
+
+MCPI_CONNECT_TIMEOUT=5
 
 logging.basicConfig(level=logging.DEBUG)
 #logging.basicConfig(level=logging.INFO)
@@ -315,16 +318,18 @@ if __name__ == '__main__':
     pollLimit = 15
     prevPosStr = ""
 
-    try:
-        if args.host:
-            mc = minecraft.Minecraft.create(args.host)
-        else:
-            mc = minecraft.Minecraft.create()
-    except:
-        e = sys.exc_info()[0]
-        log.exception('cannot connect to minecraft')
-        traceback.print_exc(file=sys.stdout)
-        sys.exit(0)
+
+    host = args.host or "localhost";
+    while (True):
+        try:
+            mc = minecraft.Minecraft.create(host)
+        except:
+            print("Timed out connecting to a Minecraft MCPI server (" + host + ":4711). Retrying in "+ str(MCPI_CONNECT_TIMEOUT) +" secs ... Press CTRL-C to exit.");
+            time.sleep( MCPI_CONNECT_TIMEOUT );
+            #e = sys.exc_info()[0]
+            #log.exception('cannot connect to minecraft')
+            #traceback.print_exc(file=sys.stdout)
+            #sys.exit(0)
 
     from BaseHTTPServer import HTTPServer
     server = HTTPServer(('localhost', 4715), GetHandler)
