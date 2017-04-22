@@ -185,19 +185,48 @@
         }
     };
 
+    TRANSLATE = {
+        en: {
+            postToChat: 'post to chat %s',
+            playerPosToChat: "post Player.pos chat",
+            setPlayerPos: "set Player pos to x:%n y:%n z:%n",
+            setBlock: "set block pos x:%n y:%n z:%n to type %n data %n %m.blockPos",
+            setBlocks: "set blocks pos x1:%n y1:%n z1:%n to x2:%n y2:%n z2:%n to type %n data %n",
+            setLine: "set line pos x1:%n z1:%n to x2:%n z2:%n height y:%n to type %n data %n",
+            setCircle: "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n",
+            getPlayerPos:"get player pos %m.pos",
+            getBlock:"get block pos x:%n y:%n z:%n %m.blockPos", 
+            whenBlockHit: "when blockHit"
+        },
+        pt: {
+            postToChat: "escreve no chat %s",
+            playerPosToChat: "escreve posição do jogador no chat",
+            setPlayerPos: "muda a pos do Jogador para x:%n y:%n z:%n",
+            setBlock: "muda o bloco na pos x:%n y:%n z:%n para o tipo %n subtipo %n %m.blockPos",
+            setBlocks: "coloca blocos pos x1:%n y1:%n z1:%n até x2:%n y2:%n z2:%n do tipo %n subtipo %n",
+            setLine: "desenha linha da pos x1:%n z1:%n até x2:%n z2:%n à altura de y:%n com blocos tipo %n subtipo %n",
+            setCircle: "desenha circulo com centro x1:%n z1:%n, raio r:%n à altura y:%n com blocos tipo %n subtipo %n",
+            getPlayerPos:"posição do Jogador %m.pos",
+            getBlock:"bloco na pos x:%n y:%n z:%n %m.blockPos", 
+            whenBlockHit: "quando bloco atingido"
+        },
+    }
+    var urlParams = new URLSearchParams(window.location.search);
+    var lang = urlParams.get('action') || 'en';
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['', 'post to chat %s', 'postToChat', 'message'],
-            [" ", "post Player.pos chat", "playerPosToChat"],
-            [" ", "set Player pos to x:%n y:%n z:%n", "setPlayerPos", 0, 0, 0],
-            [" ", "set block pos x:%n y:%n z:%n to type %n data %n %m.blockPos", "setBlock", 0, 0, 0, 1, -1],
-            [" ", "set blocks pos x1:%n y1:%n z1:%n to x2:%n y2:%n z2:%n to type %n data %n", "setBlocks", 0, 0, 0, 0, 0, 0, 1, -1],
-            [" ", "set line pos x1:%n z1:%n to x2:%n z2:%n height y:%n to type %n data %n", "setLine", 0, 0, 0, 0, 0, 1, -1],
-            [" ", "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n", "setCircle", 0, 0, 0, 0, 0, 1, -1],
-            ["R", "get player pos %m.pos", "getPlayerPos", 'x'],
-            ["R", "get block pos x:%n y:%n z:%n %m.blockPos", "getBlock", 0, 0, 0],
-            ["h", "when blockHit", 'whenBlockHit'],
+            ['',  TRANSLATE[lang].postToChat, "postToChat", "message"],
+            [" ", TRANSLATE[lang].playerPosToChat,"playerPosToChat"],
+            [" ", TRANSLATE[lang].setPlayerPos,"setPlayerPos", 0, 0, 0],
+            [" ", TRANSLATE[lang].setBlock,"setBlock", 0, 0, 0, 1, -1],
+            [" ", TRANSLATE[lang].setBlocks,"setBlocks", 0, 0, 0, 0, 0, 0, 1, -1],
+            [" ", TRANSLATE[lang].setLine,"setLine", 0, 0, 0, 0, 0, 1, -1],
+            [" ", TRANSLATE[lang].setCircle,"setCircle", 0, 0, 0, 0, 0, 1, -1],
+            ["R", TRANSLATE[lang].getPlayerPos,"getPlayerPos", 'x'],
+            ["R", TRANSLATE[lang].getBlock,"getBlock", 0, 0, 0],
+            ["h", TRANSLATE[lang].whenBlockHit,'whenBlockHit'],
         ],
         menus: {
             pos: ['x', 'y', 'z'],
