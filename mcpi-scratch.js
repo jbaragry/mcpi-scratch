@@ -213,6 +213,19 @@
             whenBlockHit: "quando bloco atingido",
             message:"mensagem"
         },
+        de: {
+            postToChat: 'Zeige Nachricht %s',
+            playerPosToChat: "Zeige Spieler-Position als Nachricht",
+            setPlayerPos: "Stelle Spieler auf x:%n y:%n z:%n",
+            setBlock: "Stelle Block auf x:%n y:%n z:%n Block %n Status %n %m.blockPos",
+            setBlocks: "Setze Bloecke von x1:%n y1:%n z1:%n bis x2:%n y2:%n z2:%n Block %n data %n",
+            setLine: "Linie von x1:%n z1:%n bis x2:%n z2:%n Hoehe y:%n mit Block %n Status %n",
+            setCircle: "Kreis mit Mittelpunkt x1:%n z1:%n Radius r:%n Hoehe y:%n Block %n Status %n",
+            getPlayerPos:"Spieler-Position %m.pos",
+            getBlock:"Block-Info fuer x:%n y:%n z:%n %m.blockPos",
+            whenBlockHit: "Wenn Block berührt",
+            message:"Nachricht"
+        },
     }
 
     function getTranslationForLang( lang ){
@@ -221,6 +234,13 @@
           case "pt-PT":
           case "pt-BR":
             return TRANSLATIONS.pt;
+          case "de":
+          case "de-DE":
+          case "de-AT":
+          case "de-CH":
+          case "de-LI":
+          case "de-LU":
+            return TRANSLATIONS.de;
           default:
             return TRANSLATIONS.en;
             
