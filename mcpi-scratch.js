@@ -128,19 +128,19 @@
         }); 
     };
 
-    // get one coord (x, y, or z) for playerPos
-    ext.getBlock = function(x, y, z, posType, callback) {
-        var cmdUrl = "http://localhost:4715/getBlock/" + x + "/" + y + "/" + z + "/" + posType;
+    // get block.id or block.data
+    ext.getBlock = function(blockData, x, y, z, posType, callback) {
+        var cmdUrl = "http://localhost:4715/getBlock/" + blockData + "/" + x + "/" + y + "/" + z + "/" + posType;
         $.ajax({
             type: "GET",
             url: cmdUrl,
             //dataType: "jsonp", // hack for the not origin problem - replace with CORS based solution
             success: function(data) {
-                console.log("getPlayerPos success ", data.trim());
+                console.log("getBlock success ", data.trim());
                 callback(data.trim());
             },
             error: function(jqxhr, textStatus, error) { // have to change this coz jasonp parse error
-                console.log("Error getPlayerPos: ", error);
+                console.log("Error getBlock: ", error);
                 callback(null);
             }
         }); 
@@ -196,7 +196,7 @@
             setLine: "set line pos x1:%n z1:%n to x2:%n z2:%n height y:%n to type %n data %n",
             setCircle: "set circle center x1:%n z1:%n radius r:%n at height y:%n to type %n data %n",
             getPlayerPos:"get player pos %m.pos",
-            getBlock:"get block pos x:%n y:%n z:%n %m.blockPos", 
+            getBlock:"get block %m.blockData pos x:%n y:%n z:%n %m.blockPos", 
             whenBlockHit: "when blockHit",
             message:"message"
         },
@@ -209,7 +209,7 @@
             setLine: "desenha linha da pos x1:%n z1:%n até x2:%n z2:%n à altura de y:%n com blocos tipo %n subtipo %n",
             setCircle: "desenha circulo com centro x1:%n z1:%n, raio r:%n à altura y:%n com blocos tipo %n subtipo %n",
             getPlayerPos:"posição do Jogador no eixo do %m.pos",
-            getBlock:"bloco na pos x:%n y:%n z:%n %m.blockPos", 
+            getBlock:"bloco %m.blockData na pos x:%n y:%n z:%n %m.blockPos", 
             whenBlockHit: "quando bloco atingido",
             message:"mensagem"
         },
@@ -222,7 +222,7 @@
             setLine: "Linie von x1:%n z1:%n bis x2:%n z2:%n Hoehe y:%n mit Block %n Status %n",
             setCircle: "Kreis mit Mittelpunkt x1:%n z1:%n Radius r:%n Hoehe y:%n Block %n Status %n",
             getPlayerPos:"Spieler-Position %m.pos",
-            getBlock:"Block-Info fuer x:%n y:%n z:%n %m.blockPos",
+            getBlock:"Block %m.blockData fuer x:%n y:%n z:%n %m.blockPos",
             whenBlockHit: "Wenn Block berührt",
             message:"Nachricht"
         },
@@ -267,12 +267,13 @@
             [" ", translate.setLine,"setLine", 0, 0, 0, 0, 0, 1, -1],
             [" ", translate.setCircle,"setCircle", 0, 0, 0, 0, 0, 1, -1],
             ["R", translate.getPlayerPos,"getPlayerPos", 'x'],
-            ["R", translate.getBlock,"getBlock", 0, 0, 0],
+            ["R", translate.getBlock,"getBlock", '', 0, 0, 0],
             ["h", translate.whenBlockHit,'whenBlockHit'],
         ],
         menus: {
             pos: ['x', 'y', 'z'],
-            blockPos: ['abs', 'rel']
+            blockPos: ['abs', 'rel'],
+            blockData: ['id', 'data']
         }
     };
 
