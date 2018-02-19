@@ -189,13 +189,11 @@ class GetHandler(BaseHTTPRequestHandler):
 
     def getPlayerPos(self, params): # doesn't support metadata
         log.info('invoke getPlayerPos: {}'.format(params[0]))
-        playerPos = mc.player.getPos()
+        playerPos = mc.player.getTilePos()
         #Using your players position
         # - the players position is an x,y,z coordinate of floats (e.g. 23.59,12.00,-45.32)
         # - in order to use the players position in other commands we need integers (e.g. 23,12,-45)
-        # - so round the players position
-        # - the Vec3 object is part of the minecraft class library
-        playerPos = minecraft.Vec3(int(playerPos.x), int(playerPos.y), int(playerPos.z))
+        # - so we use getTilePos() which returns the integers
         log.debug(playerPos)
         # I'm sure theres a more pythony way to get at the vector elements but...
         coord = params[0];
@@ -209,21 +207,22 @@ class GetHandler(BaseHTTPRequestHandler):
         return str(coordVal)
 
     # getBlock calls getBlockWithData function
-    # currently only returns the id and not the data 
-    # TODO: refactor to return data also
     def getBlock(self, params):
         log.info ('getBlock: {0}'.format(params))
-        x = int(params[0])
-        y = int(params[1])
-        z = int(params[2])
-        if (params[3] == 'rel'): # set the block relative to the player
+        x = int(params[1])
+        y = int(params[2])
+        z = int(params[3])
+        if (params[4] == 'rel'): # set the block relative to the player
             playerPos = mc.player.getTilePos()
             x += playerPos.x
             y += playerPos.y
             z += playerPos.z
         blockData = mc.getBlockWithData(x, y, z)
         log.info ('blockData: %s', blockData)
-        return str(blockData.id)
+        if params[0] == 'data':
+            return str(blockData.data)
+        else:
+            return str(blockData.id)
 
     # pollBlockHits calls pollBlockHits function
     # currently only returns the first block in the period between polls
