@@ -145,6 +145,11 @@
             }
         }); 
     };
+    
+    // report block id for block name
+    ext.blockID = function(blockName) {
+        return BLOCKS[blockName];
+    };
 
     function checkMC_Events() {
         var cmdUrl = "http://localhost:4715/pollBlockHit/";
@@ -198,7 +203,23 @@
             getPlayerPos:"get player pos %m.pos",
             getBlock:"get block %m.blockData pos x:%n y:%n z:%n %m.blockPos", 
             whenBlockHit: "when blockHit",
-            message:"message"
+            message:"message",
+            blocks:{AIR:0, STONE:1, GRASS:2, DIRT:3, COBBLESTONE:4, WOOD_PLANKS:5, SAPLING:6, BEDROCK:7,
+                    WATER_FLOWING:8, WATER_STATIONARY:9, LAVA_FLOWING:10, LAVA_STATIONARY:11, SAND:12,
+                    GRAVEL:13, GOLD_ORE:14, IRON_ORE:15, COAL_ORE:16, WOOD:17, LEAVES:18, GLASS:20, 
+                    LAPIS_LAZULI_ORE:21, LAPIS_LAZULI_BLOCK:22, SANDSTONE:24, BED:26, COBWEB:30, GRASS_TALL:31,
+                    WOOL:35, FLOWER_YELLOW:37, FLOWER_CYAN:38, MUSHROOM_BROWN:39, MUSHROOM_RED:40, GOLD_BLOCK:41,
+                    IRON_BLOCK:42, STONE_SLAB_DOUBLE:43, STONE_SLAB:44, BRICK_BLOCK:45,TNT:46, BOOKSHELF:47,
+                    MOSS_STONE:48, OBSIDIAN:49, TORCH:50, FIRE:51, STAIRS_WOOD:53, CHEST:54, DIAMOND_ORE:56,
+                    DIAMOND_BLOCK:57, CRAFTING_TABLE:58, WHEAT:59, FARMLAND:60, FURNACE_INACTIVE:61,
+                    FURNACE_ACTIVE:62, STANDING_SIGN:63, DOOR_WOOD:64, LADDER: 65, STAIRS_COBBLESTONE:67,
+                    WALL_SIGN:68, DOOR_IRON:71, REDSTONE_ORE:73, LIT_REDSTONE_ORE:74, SNOW:78, ICE:79,
+                    SNOW_BLOCK: 80, CACTUS:81, CLAY:82, SUGAR_CANE:83, FENCE:85, NETHERRACK:87, GLOWSTONE_BLOCK:89,
+                    BEDROCK_INVISIBLE:95, TRAPDOOR:97, STONE_BRICK:98, GLASS_PANE:102, MELON:103,
+                    MELON_STEM:105, FENCE_GATE:107, BRICK_STAIRS:108, STONE_BRICK_STAIRS:109, NETHER_BRICK:112,
+                    NETHER_BRICK_STAIRS:114, SANDSTONE_STAIRS:128, QUARTZ_BLOCK:155, QUARTZ_STAIRS:156,
+                    STONE_CUTTER:245, GLOWING_OBSIDIAN:246, NETHER_REACTOR_CORE:247, INFO_UPDATE:248,
+                    INFO_UPDATE2:249}
         },
         pt: {
             postToChat: "escreve no chat %s",
@@ -211,7 +232,23 @@
             getPlayerPos:"posição do Jogador no eixo do %m.pos",
             getBlock:"bloco %m.blockData na pos x:%n y:%n z:%n %m.blockPos", 
             whenBlockHit: "quando bloco atingido",
-            message:"mensagem"
+            message:"mensagem",
+            blocks:{AIR:0, STONE:1, GRASS:2, DIRT:3, COBBLESTONE:4, WOOD_PLANKS:5, SAPLING:6, BEDROCK:7,
+                    WATER_FLOWING:8, WATER_STATIONARY:9, LAVA_FLOWING:10, LAVA_STATIONARY:11, SAND:12,
+                    GRAVEL:13, GOLD_ORE:14, IRON_ORE:15, COAL_ORE:16, WOOD:17, LEAVES:18, GLASS:20, 
+                    LAPIS_LAZULI_ORE:21, LAPIS_LAZULI_BLOCK:22, SANDSTONE:24, BED:26, COBWEB:30, GRASS_TALL:31,
+                    WOOL:35, FLOWER_YELLOW:37, FLOWER_CYAN:38, MUSHROOM_BROWN:39, MUSHROOM_RED:40, GOLD_BLOCK:41,
+                    IRON_BLOCK:42, STONE_SLAB_DOUBLE:43, STONE_SLAB:44, BRICK_BLOCK:45,TNT:46, BOOKSHELF:47,
+                    MOSS_STONE:48, OBSIDIAN:49, TORCH:50, FIRE:51, STAIRS_WOOD:53, CHEST:54, DIAMOND_ORE:56,
+                    DIAMOND_BLOCK:57, CRAFTING_TABLE:58, WHEAT:59, FARMLAND:60, FURNACE_INACTIVE:61,
+                    FURNACE_ACTIVE:62, STANDING_SIGN:63, DOOR_WOOD:64, LADDER: 65, STAIRS_COBBLESTONE:67,
+                    WALL_SIGN:68, DOOR_IRON:71, REDSTONE_ORE:73, LIT_REDSTONE_ORE:74, SNOW:78, ICE:79,
+                    SNOW_BLOCK: 80, CACTUS:81, CLAY:82, SUGAR_CANE:83, FENCE:85, NETHERRACK:87, GLOWSTONE_BLOCK:89,
+                    BEDROCK_INVISIBLE:95, TRAPDOOR:97, STONE_BRICK:98, GLASS_PANE:102, MELON:103,
+                    MELON_STEM:105, FENCE_GATE:107, BRICK_STAIRS:108, STONE_BRICK_STAIRS:109, NETHER_BRICK:112,
+                    NETHER_BRICK_STAIRS:114, SANDSTONE_STAIRS:128, QUARTZ_BLOCK:155, QUARTZ_STAIRS:156,
+                    STONE_CUTTER:245, GLOWING_OBSIDIAN:246, NETHER_REACTOR_CORE:247, INFO_UPDATE:248,
+                    INFO_UPDATE2:249}     
         },
         de: {
             postToChat: 'Zeige Nachricht %s',
@@ -224,7 +261,22 @@
             getPlayerPos:"Spieler-Position %m.pos",
             getBlock:"Block %m.blockData fuer x:%n y:%n z:%n %m.blockPos",
             whenBlockHit: "Wenn Block berührt",
-            message:"Nachricht"
+            message:"Nachricht",
+            blocks:{LUFT:0, STEIN:1, GRASBLOCK:2, ERDE:3, PFLASTERSTEIN:4, BRETTER:5, SETZLING:6, FELSEN:7,
+                    FLIESSENDES_WASSER:8, WASSER:9, FLIESSENDE_LAVA:10, LAVA:11, SAND:12, KIES:13, GOLDERZ:14,
+                    EISENERZ:15, STEINKOHLE:16, HOLZ:17, BLÄTTER:18, GLAS:20, LAPISLAZULIERZ:21, LAPISLAZULI:22,
+                    SANDSTEIN:24, BETT:26, SPINNENNETZ:30, GRAS:31, WOLLE:35, GELBE_BLUME: 37, BLAUE_BLUME: 38,
+                    BRAUNER_PILZ:39, ROTER_PILZ:40, GOLD:41, EISEN:42, DOPPELSTUFE:43, STUFE:44, ZIEGEL:45,TNT:46,
+                    BÜCHERREGAL:47, BEMOOSTER_PFLASTERSTEIN:48, OBSIDIAN:49, FACKEL:50, FEUER:51, HOLZTREPPE: 53,
+                    TRUHE:54, DIAMANTERZ:56, DIAMANT:57, WERKBANK:58, WEIZEN:59, ACKERBODEN:60, OFEN:61,
+                    BRENNENDER_OFEN:62, SCHILD:63, HOLZTÜR:64, LEITER:65, PFLASTERSTEINTREPPE:67, WANDSCHILD:68,
+                    EISENTÜR:71, REDSTONEERZ:73, LEUCHTENDES_REDSTONEERZ:74, SCHNEE:78, EIS:79, SCHNEEBLOCK: 80,
+                    KAKTUS:81, TON:82, ZUCKERROHR:83, ZAUN:85, NETHERRACK:87, GLOWSTONE_BLOCK:89,
+                    UNSICHTBARER_FELSEN:95, FALLTÜR:97, STEINZIEGEL:98, GLASSCHEIBE:102, MELONE:103,
+                    MELONENPFLANZE:105, ZAUNTOR:107, ZIEGELTREPPE:108, STEINZIEGELTREPPE:109, NETHERZIEGEL:112,
+                    NETHERZIEGELTREPPE:114, SANDSTEINTREPPE:128, QUARTZ:155, QUARTZTREPPE:156,
+                    STEINMETZ:245, LEUCHTENDER_OBSIDIAN:246, NETHERREACTORKERN:247, INFO_UPDATE:248,
+                    INFO_UPDATE2:249}
         },
     }
 
@@ -255,6 +307,11 @@
     var urlParams = new URLSearchParams(window.location.search);
     var lang = urlParams.get('lang') || navigator.languages[0];
     var translate = getTranslationForLang(lang);
+    
+    var blockNames = [];
+    var BLOCKS = translate.blocks
+    for (key in BLOCKS)
+        {blockNames.push(key)}
 
     // Block and block menu descriptions
     var descriptor = {
@@ -269,11 +326,13 @@
             ["R", translate.getPlayerPos,"getPlayerPos", 'x'],
             ["R", translate.getBlock,"getBlock", '', 0, 0, 0],
             ["h", translate.whenBlockHit,'whenBlockHit'],
+            ["r", "%m.block", "blockID", blockNames[1]],
         ],
         menus: {
             pos: ['x', 'y', 'z'],
             blockPos: ['abs', 'rel'],
-            blockData: ['id', 'data']
+            blockData: ['id', 'data'],
+            block: blockNames
         }
     };
 
